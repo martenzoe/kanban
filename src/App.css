@@ -1,42 +1,192 @@
-#root {
-  max-width: 1280px;
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  background: linear-gradient(135deg, #1f1f2f, #2b2b44);
+  color: #f9f9f9;
+  min-height: 100vh;
+}
+
+/* Layout */
+.app-container {
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2rem 1rem;
+}
+
+h1 {
   text-align: center;
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin-bottom: 2rem;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Form */
+.task-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.task-form input,
+.task-form select {
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  background: #2e2e44;
+  color: #fff;
+  min-width: 150px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.task-form button {
+  background-color: #ff3e3e;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-.card {
-  padding: 2em;
+.task-form button:hover {
+  background-color: #ff1c1c;
 }
 
-.read-the-docs {
-  color: #888;
+.task-form button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+/* Kanban Columns */
+.kanban-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.column {
+  background-color: #2a2a3c;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  flex: 1 1 300px;
+  max-width: 400px;
+}
+
+.column h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+/* Task Card */
+li {
+  list-style: none;
+  background-color: #3b3b4f;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.task-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.task-content {
+  flex: 1;
+}
+
+.task-content strong {
+  font-size: 1rem;
+  color: #fff;
+  display: block;
+}
+
+.task-content small {
+  font-size: 0.75rem;
+  color: #bbb;
+}
+
+.task-content .comment {
+  margin-top: 0.3rem;
+  font-size: 0.85rem;
+  color: #aaa;
+  font-style: italic;
+}
+
+/* Status Dot */
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-top: 0.4rem;
+}
+
+.status-dot.todo {
+  background-color: #ef4444;
+}
+.status-dot.doing {
+  background-color: #f59e0b;
+}
+.status-dot.done {
+  background-color: #10b981;
+}
+
+/* Buttons in Task */
+.task-buttons {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.task-buttons button {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.task-buttons .todo {
+  background-color: #ef4444;
+}
+.task-buttons .doing {
+  background-color: #f59e0b;
+}
+.task-buttons .done {
+  background-color: #10b981;
+}
+.task-buttons .delete {
+  background-color: #6b7280;
+}
+
+.task-buttons button:hover {
+  opacity: 0.85;
+}
+
+/* Drag Handle */
+.drag-handle {
+  cursor: grab;
+  font-size: 1.2rem;
+  color: #aaa;
+  user-select: none;
+}
+
+/* Empty Text */
+.empty {
+  text-align: center;
+  color: #999;
+  font-style: italic;
+  margin-top: 2rem;
 }
