@@ -1,92 +1,101 @@
 📌 Kanban Taskboard – React + DnD + JSON Server
-A simple but powerful Kanban app built with React, @dnd-kit for drag & drop, and a JSON Server as mock backend.
-Designed for Teams oder Solo-User, die eine schnelle, moderne UI mit Task-Status "Todo", "Doing" und "Done" suchen.
+A lightweight Kanban board built with React, @dnd-kit for drag & drop, and a mock backend powered by json-server.
+Designed for fast, modern task management with support for due dates, comments, and smooth status transitions.
 
 🚀 Features
-Tasks erstellen mit:
+✅ Add tasks with:
 
-Titel
+Title
 
-Datum
+Optional comment
 
-Optionalem Kommentar
+Due date
 
-Drag & Drop zwischen Spalten (powered by @dnd-kit)
+🧲 Drag & drop between columns (todo, doing, done)
 
-Status ändern per Button oder Drag & Drop
+🔁 Status change via button or drag
 
-Tasks löschen mit Bestätigung
+🗑️ Delete tasks with confirmation
 
-Responsive, moderne UI inspiriert von Trello / Mobile Productivity Apps
+🎨 Responsive, polished UI with colored buttons and cards
 
-json-server Support für schnelles, lokales Prototyping
+🧪 Local development backend with JSON Server
 
-📦 Tech Stack
-Layer	Tech
-Frontend	React + Hooks
-DnD	@dnd-kit/core, sortable
-State	React useState
-Backend	json-server (REST API, Mock Backend)
+⚙️ Tech Stack
+Layer	Stack
+Frontend	React (with hooks)
+Drag & Drop	@dnd-kit/core, sortable
 Styling	Custom CSS
-🖥️ Screenshots
-Optional: Lege Screenshots im /screenshots-Ordner ab (Desktop & Mobile).
+Backend (Mock)	json-server
 
-🛠️ Setup Instructions
+🖼️ Screenshots
+Desktop	Mobile
+
+Add your screenshots to a /screenshots folder for GitHub preview.
+
+🛠️ Getting Started
 bash
-# 1. Repository klonen
+Kopieren
+Bearbeiten
+# 1. Clone the repo
 git clone https://github.com/your-username/kanban-taskboard.git
 cd kanban-taskboard
 
-# 2. Abhängigkeiten installieren
+# 2. Install dependencies
 npm install
 
-# 3. Mock Backend (JSON Server) starten
+# 3. Start mock API
 npx json-server --watch db.json --port 4000
 
-# 4. .env-Datei anlegen und Backend-URL definieren:
+# 4. Add API base URL to .env file
 echo "VITE_BACKEND_URL=http://localhost:4000" > .env
 
-# 5. App starten
+# 5. Start the app
 npm run dev
-📁 Folder Structure
+📁 Project Structure
 bash
+Kopieren
+Bearbeiten
 /src
-  ├── App.jsx         # Hauptlogik
-  ├── App.css         # Styles
-  ├── components/     # Optional: SortableTask auslagern
-  └── ...
-/db.json              # Mock-DB für JSON Server
-.env                  # API-URL Config
-🧪 API Schema (db.json)
+  ├── App.jsx        # Main component
+  ├── App.css        # Styling
+  └── SortableTask.jsx # Task item logic
+/db.json             # Mock data for json-server
+.env                 # Environment variables
+🔌 API Example (db.json)
 json
+Kopieren
+Bearbeiten
 {
   "tasks": [
     {
       "id": 1,
-      "text": "Do something",
+      "text": "Finish wireframes",
       "status": "todo",
       "date": "2025-07-15",
-      "comment": "Optional"
+      "comment": "Don't forget mobile view"
     }
   ]
 }
-✅ Status & Roadmap
-Drag & Drop via @dnd-kit
+✅ Roadmap
+ Drag & drop support
 
-Farbige Buttons pro Status
+ Status updates via button
 
-Cleanes Dark Theme
+ Mobile-friendly layout
 
-Responsive Layout
+ UI polish with gradients and colors
 
-Persistente ID-Verwaltung (z.B. UUID)
+ Add persistent ID handling (e.g. UUID)
 
-Optionales User-System
+ Optional login / user separation
 
-Deployment via Vercel / Netlify
+ Hosting (e.g. Vercel + external JSON API)
 
-📄 License
-MIT — free for personal & commercial use.
+📜 License
+MIT — Free for personal and commercial use.
 
-👩‍💻 Contribute
-Das Projekt ist ein leichtgewichtiges, erweiterbares Grundgerüst – gerne forken, verbessern oder für eigene Projekte nutzen!
+💡 Contribution
+This project is meant as a clean base for small productivity tools.
+Fork it, customize it, or build on top of it.
+
