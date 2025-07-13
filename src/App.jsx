@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+
 function App() {
   const [tasks, setTasks] = useState([])
   const [taskText, setTaskText] = useState('')
   const [taskStatus, setTaskStatus] = useState('todo')
 
-  const API_BASE = 'https://gammashelf-perfectthink-3000.codio.io/tasks'
-
   const getTasks = async () => {
     try {
-      const res = await fetch(API_BASE, {
+      const res = await fetch(`${BACKEND_URL}/tasks`, {
         mode: 'cors',
         headers: {
           'Access-Control-Allow-Origin': '*'
@@ -30,7 +30,7 @@ function App() {
 
   const addTask = async (task) => {
     try {
-      const res = await fetch(API_BASE, {
+      const res = await fetch(`${BACKEND_URL}/tasks`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,7 +38,6 @@ function App() {
         },
         body: JSON.stringify(task)
       })
-
       if (!res.ok) throw new Error('Failed to add task')
       getTasks()
     } catch (err) {
@@ -46,10 +45,9 @@ function App() {
     }
   }
 
-  // ✅ NEW: Update Task
   const updateTask = async (updatedTask) => {
     try {
-      const res = await fetch(`${API_BASE}/${updatedTask.id}`, {
+      const res = await fetch(`${BACKEND_URL}/tasks/${updatedTask.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -57,7 +55,6 @@ function App() {
         },
         body: JSON.stringify({ status: updatedTask.status })
       })
-
       if (!res.ok) throw new Error('Failed to update task')
       getTasks()
     } catch (err) {
