@@ -6,9 +6,11 @@ function App() {
   const [taskText, setTaskText] = useState('')
   const [taskStatus, setTaskStatus] = useState('todo')
 
+  const API_BASE = 'https://gammashelf-perfectthink-3000.codio.io/tasks'
+
   const getTasks = async () => {
     try {
-      const res = await fetch('https://gammashelf-perfectthink-3000.codio.io/tasks', {
+      const res = await fetch(API_BASE, {
         mode: 'cors',
         headers: {
           'Access-Control-Allow-Origin': '*'
@@ -16,27 +18,60 @@ function App() {
       })
       if (!res.ok) throw new Error('Failed to load tasks')
       const data = await res.json()
-      console.log('Loaded tasks:', data)
-      return data
+      setTasks(data)
     } catch (err) {
       console.error('Error in getTasks:', err)
-      return []
     }
   }
 
   useEffect(() => {
-    getTasks().then(setTasks)
+    getTasks()
   }, [])
 
+  const addTask = async (task) => {
+    try {
+      const res = await fetch(API_BASE, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        },
+        body: JSON.stringify(task)
+      })
+
+      if (!res.ok) throw new Error('Failed to add task')
+      getTasks()
+    } catch (err) {
+      console.error('Error in addTask:', err)
+    }
+  }
+
+  // ✅ NEW: Update Task
+  const updateTask = async (updatedTask) => {
+    try {
+      const res = await fetch(`${API_BASE}/${updatedTask.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        },
+        body: JSON.stringify({ status: updatedTask.status })
+      })
+
+      if (!res.ok) throw new Error('Failed to update task')
+      getTasks()
+    } catch (err) {
+      console.error('Error in updateTask:', err)
+    }
+  }
+
   const handleSubmit = (e) => {
-    e.preventDefault() // ❗ Prevent page refresh
+    e.preventDefault()
     const newTask = {
       text: taskText,
       status: taskStatus
     }
-    console.log('New task:', newTask)
-
-    // Clear form fields
+    addTask(newTask)
     setTaskText('')
     setTaskStatus('todo')
   }
@@ -75,7 +110,29 @@ function App() {
 
       <ul>
         {tasks.map(task => (
-          <li key={task.id}>{task.text} ({task.status})</li>
+          <li key={task.id}>
+            {task.text} ({task.status})
+            <div>
+              <button
+                onClick={() => updateTask({ ...task, status: 'todo' })}
+                disabled={task.status === 'todo'}
+              >
+                Todo
+              </button>
+              <button
+                onClick={() => updateTask({ ...task, status: 'doing' })}
+                disabled={task.status === 'doing'}
+              >
+                Doing
+              </button>
+              <button
+                onClick={() => updateTask({ ...task, status: 'done' })}
+                disabled={task.status === 'done'}
+              >
+                Done
+              </button>
+            </div>
+          </li>
         ))}
       </ul>
     </div>
